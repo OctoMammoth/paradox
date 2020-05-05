@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'widgets/box.dart';
+import 'home.dart';
+import 'login.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,32 +13,42 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      showSemanticsDebugger: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => MyHomePage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/home': (context) => Home(),
+        '/login': (context) => Login(),
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 InputBorder border;
 
-bool _bigger = false;
+bool _bigger = true;
 
 class _MyHomePageState extends State<MyHomePage> {
+  Timer _timer;
+
+  _MyHomePageState() {
+    _timer = new Timer(const Duration(seconds: 3), () async {
+      setState(() {
+        _bigger = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 duration: Duration(milliseconds: 300),
               ),
               AnimatedContainer(
-                height: _bigger ? 0 : 200,
+                height: _bigger ? 0 : 300,
                 width: 250,
                 duration: Duration(milliseconds: 350),
                 curve: Curves.easeInOut,
@@ -69,6 +82,45 @@ class _MyHomePageState extends State<MyHomePage> {
                           border: _bigger ? InputBorder.none : border,
                           hintText: 'Пароль'),
                     ),
+                    Container(
+                      height: 60,
+                    ),
+                    FlatButton(
+                        color: Color(0xFF3367EF),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        },
+                        textColor: Colors.white,
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 80,
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Войти',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16),
+                          ),)
+                    ),
+                    FlatButton(
+                        color: null,
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                        textColor: Colors.white,
+                        padding: const EdgeInsets.all(0.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: null,
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Войти как сотрудник',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,color: Color(0xFF3367EF),),
+                          ),)
+                    )
                   ],
                 ),
               ),
@@ -87,15 +139,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ParadoxBox(bottom: -100, right: -50, scale: 1.26, rotate: -20),
                 ParadoxBox(bottom: 180, left: -80, scale: 0.68, rotate: 30),
               ])),
-          Positioned(
-            right: 20,
-            bottom: 20,
-            child: FloatingActionButton(
-              onPressed: () => setState(() {
-                _bigger = !_bigger;
-              }),
-            ),
-          ),
+//          Positioned(
+//            right: 20,
+//            bottom: 20,
+//            child: FloatingActionButton(
+//              onPressed: () => setState(() {
+//                _bigger = !_bigger;
+//              }),
+//            ),
+//          ),
         ],
       ),
     );
