@@ -3,6 +3,8 @@ import 'dart:async';
 import 'widgets/box.dart';
 import 'home.dart';
 import 'login.dart';
+import 'payments.dart';
+import 'search.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Color(0xFF0B131F)
       ),
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
@@ -24,6 +27,8 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/home': (context) => Home(),
         '/login': (context) => Login(),
+        '/payments': (context) => Payments(),
+        '/search' : (context) => Search()
       },
     );
   }
@@ -52,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
           Column(
@@ -131,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: Duration(milliseconds: 500),
               width: _bigger ? 1000 : 0,
               child: Stack(children: [
                 ParadoxBox(top: 140, right: -80, scale: 0.8, rotate: -22),
