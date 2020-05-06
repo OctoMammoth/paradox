@@ -58,8 +58,8 @@ class _Business extends State<Business> {
             height: 32,
           ),
 
-          menuBox(image: 'images/orders.png', title: "Заказы",),
-          menuBox(image: 'images/teamates.png', title: "Сотрудникик",),
+          menuBox(image: 'images/orders.png', title: "Заказы", onTap: () => {Navigator.pushNamed(context, '/ordersBusiness')},),
+          menuBox(image: 'images/teamates.png', title: "Сотрудники", onTap: () => {Navigator.pushNamed(context, "/team")},),
           menuBox(image: 'images/marketing.png', title: "Умная булгахтерия (LITE)",),
           menuBox(image: 'images/bills.png', title: "Квитанции",),
           menuBox(image: 'images/managment.png', title: "Управление услугами",),

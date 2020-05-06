@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 double PI = 3.14159265359;
 
-class menuBox extends StatelessWidget {
+class OrderAdd extends StatelessWidget {
   final String image;
   final String title;
   Function onTap;
@@ -39,10 +39,10 @@ class menuBox extends StatelessWidget {
                     )),
               ),
             ]),
-            Container(height: 15),
-            Padding(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Container(height: 1, color: Color(0xFF162845))),
+            Container(height: 25),
+//            Padding(
+//                padding: EdgeInsets.only(left: 20, right: 20),
+//                child: Container(height: 1, color: Color(0xFF162845))),
           ],
         ),
       ),
@@ -51,7 +51,7 @@ class menuBox extends StatelessWidget {
 
 
 
-  menuBox({
+  OrderAdd({
     this.image,
     this.title,
     this.onTap()

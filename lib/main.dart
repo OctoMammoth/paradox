@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paradox/ordersBusiness.dart';
 import 'dart:async';
 import 'widgets/box.dart';
 import 'home.dart';
@@ -7,6 +8,9 @@ import 'payments.dart';
 import 'search.dart';
 import 'business.dart';
 import 'more.dart';
+import 'ordersBusiness.dart';
+import 'team.dart';
+import 'telegram.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +36,9 @@ class MyApp extends StatelessWidget {
         '/search': (context) => Search(),
         '/business': (context) => Business(),
         '/more': (context) => More(),
+        '/ordersBusiness': (context) => OrdersBusiness(),
+        '/team' : (context) => Team(),
+        '/telegram' : (context) => Telegram(),
       },
     );
   }

@@ -61,7 +61,7 @@ class _More extends State<More> {
           menuBox(image: 'images/teamates.png', title: "О нас",),
           menuBox(image: 'images/notifications.png', title: "Уведомления",),
           menuBox(image: 'images/lock.png', title: "Криптинг",),
-          menuBox(image: 'images/bills.png', title: "Telegram Bot",),
+          menuBox(image: 'images/bills.png', title: "Telegram Bot", onTap: () => {Navigator.pushNamed(context, '/telegram')},),
           menuBox(image: 'images/settings.png', title: "Найстройки",),
           menuBox(image: 'images/numbers.png', title: "Контакты",),
 
