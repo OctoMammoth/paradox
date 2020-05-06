@@ -5,6 +5,8 @@ import 'home.dart';
 import 'login.dart';
 import 'payments.dart';
 import 'search.dart';
+import 'business.dart';
+import 'more.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,10 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: Color(0xFF0B131F)
-      ),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: Color(0xFF0B131F)),
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => MyHomePage(),
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Home(),
         '/login': (context) => Login(),
         '/payments': (context) => Payments(),
-        '/search' : (context) => Search()
+        '/search': (context) => Search(),
+        '/business': (context) => Business(),
+        '/more': (context) => More(),
       },
     );
   }
@@ -105,10 +108,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             'Войти',
                             style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16),
-                          ),)
-                    ),
+                                fontWeight: FontWeight.w600, fontSize: 16),
+                          ),
+                        )),
                     FlatButton(
                         color: null,
                         onPressed: () {
@@ -123,10 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text(
                             'Войти как сотрудник',
                             style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,color: Color(0xFF3367EF),),
-                          ),)
-                    )
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Color(0xFF3367EF),
+                            ),
+                          ),
+                        ))
                   ],
                 ),
               ),

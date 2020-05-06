@@ -1,16 +1,17 @@
 import 'dart:math';
-import 'widgets/recommendationBox.dart';
 
 import 'package:flutter/material.dart';
 
-class Search extends StatefulWidget {
+import 'widgets/menuBox.dart';
+
+class Business extends StatefulWidget {
   @override
-  _Search createState() => _Search();
+  _Business createState() => _Business();
 }
 
 InputBorder border;
 
-class _Search extends State<Search> {
+class _Business extends State<Business> {
   final Random r = Random();
   final List<IconData> iconData = <IconData>[
     Icons.business_center,
@@ -18,9 +19,9 @@ class _Search extends State<Search> {
     Icons.notifications_none
   ];
   Icon randomIcon() => Icon(
-        iconData[r.nextInt(iconData.length)],
-        size: 40,
-      );
+    iconData[r.nextInt(iconData.length)],
+    size: 40,
+  );
   final List<Color> colorData = <Color>[Color(0xFF6B94FF), Color(0xFFFFFFFF)];
   Color randomColor() => Color(colorData[r.nextInt(colorData.length)].value);
 
@@ -29,7 +30,7 @@ class _Search extends State<Search> {
   void _navigateToScreens(int index) {
     if (index == 1) Navigator.pushReplacementNamed(context, '/payments');
     if (index == 0) Navigator.pushReplacementNamed(context, '/home');
-    if (index == 3) Navigator.pushReplacementNamed(context, '/business');
+    if (index == 2) Navigator.pushReplacementNamed(context, '/search');
     if (index == 4) Navigator.pushReplacementNamed(context, '/more');
   }
 
@@ -50,43 +51,26 @@ class _Search extends State<Search> {
             padding: EdgeInsets.only(left: 25, top: 60),
             child: Align(
               alignment: Alignment(-1, -1),
-              child: Image.asset('images/recommendations.png'),
+              child: Image.asset('images/logobus.png'),
             ),
           ),
           Container(
             height: 32,
           ),
-          Container(
-              height: 30,
-              width: 330,
-              child: TextField(
-                style: TextStyle(color: Color(0xFFCCCCD7)),
-                decoration: InputDecoration(
-                    border: new UnderlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
-                    icon: Icon(
-                      Icons.search,
-                      color: Color(0xFF2952BB),
-                    ),
-                    hintText: 'Запрос',
-                    hintStyle: TextStyle(color: Colors.white10, fontWeight: FontWeight.w700),
-                    helperStyle : TextStyle(color: Colors.white70),
-                    fillColor: Color(0xFF172C5E)),
-              )),
-          Container(height: 18,),
-          recBox(title: "Как правильно открывать бизнес ?", score: 746,),
-          recBox(title: "Кредиты для бизнеса.", score: 342,),
-          recBox(title: "Лайфхаки для бизнеса.", score: 243,),
-          recBox(title: "Мир для всех!", score: 83,),
-          recBox(title: "Как работать в 1C?", score: 0,),
-          recBox(title: "Как следить за работниками?", score: -20,),
+
+          menuBox(image: 'images/orders.png', title: "Заказы",),
+          menuBox(image: 'images/teamates.png', title: "Сотрудникик",),
+          menuBox(image: 'images/marketing.png', title: "Умная булгахтерия (LITE)",),
+          menuBox(image: 'images/bills.png', title: "Квитанции",),
+          menuBox(image: 'images/managment.png', title: "Управление услугами",),
+          menuBox(image: 'images/lock.png', title: "Безопасность",),
 
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
-        currentIndex: 2,
+        currentIndex: 3,
         onTap: (int index) {
           setState(() {
             print(index);
@@ -120,23 +104,23 @@ class _Search extends State<Search> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-              color: Colors.black,
+              color: Colors.grey,
             ),
             title: Text('Поиск',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.black,
+                  color: Colors.grey,
                 )),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.business_center,
-              color: Colors.grey,
+              color: Colors.black,
             ),
             title: Text('Бизнес',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey,
+                  color: Colors.black,
                 )),
           ),
           BottomNavigationBarItem(

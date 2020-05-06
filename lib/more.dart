@@ -1,16 +1,17 @@
 import 'dart:math';
-import 'widgets/recommendationBox.dart';
+
+import 'widgets/menuBox.dart';
 
 import 'package:flutter/material.dart';
 
-class Search extends StatefulWidget {
+class More extends StatefulWidget {
   @override
-  _Search createState() => _Search();
+  _More createState() => _More();
 }
 
 InputBorder border;
 
-class _Search extends State<Search> {
+class _More extends State<More> {
   final Random r = Random();
   final List<IconData> iconData = <IconData>[
     Icons.business_center,
@@ -18,9 +19,9 @@ class _Search extends State<Search> {
     Icons.notifications_none
   ];
   Icon randomIcon() => Icon(
-        iconData[r.nextInt(iconData.length)],
-        size: 40,
-      );
+    iconData[r.nextInt(iconData.length)],
+    size: 40,
+  );
   final List<Color> colorData = <Color>[Color(0xFF6B94FF), Color(0xFFFFFFFF)];
   Color randomColor() => Color(colorData[r.nextInt(colorData.length)].value);
 
@@ -29,8 +30,8 @@ class _Search extends State<Search> {
   void _navigateToScreens(int index) {
     if (index == 1) Navigator.pushReplacementNamed(context, '/payments');
     if (index == 0) Navigator.pushReplacementNamed(context, '/home');
+    if (index == 2) Navigator.pushReplacementNamed(context, '/search');
     if (index == 3) Navigator.pushReplacementNamed(context, '/business');
-    if (index == 4) Navigator.pushReplacementNamed(context, '/more');
   }
 
 //  void _onItemTapped(int index) {
@@ -50,43 +51,26 @@ class _Search extends State<Search> {
             padding: EdgeInsets.only(left: 25, top: 60),
             child: Align(
               alignment: Alignment(-1, -1),
-              child: Image.asset('images/recommendations.png'),
+              child: Image.asset('images/sevices.png'),
             ),
           ),
           Container(
             height: 32,
           ),
-          Container(
-              height: 30,
-              width: 330,
-              child: TextField(
-                style: TextStyle(color: Color(0xFFCCCCD7)),
-                decoration: InputDecoration(
-                    border: new UnderlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.blue)),
-                    icon: Icon(
-                      Icons.search,
-                      color: Color(0xFF2952BB),
-                    ),
-                    hintText: 'Запрос',
-                    hintStyle: TextStyle(color: Colors.white10, fontWeight: FontWeight.w700),
-                    helperStyle : TextStyle(color: Colors.white70),
-                    fillColor: Color(0xFF172C5E)),
-              )),
-          Container(height: 18,),
-          recBox(title: "Как правильно открывать бизнес ?", score: 746,),
-          recBox(title: "Кредиты для бизнеса.", score: 342,),
-          recBox(title: "Лайфхаки для бизнеса.", score: 243,),
-          recBox(title: "Мир для всех!", score: 83,),
-          recBox(title: "Как работать в 1C?", score: 0,),
-          recBox(title: "Как следить за работниками?", score: -20,),
+
+          menuBox(image: 'images/teamates.png', title: "О нас",),
+          menuBox(image: 'images/notifications.png', title: "Уведомления",),
+          menuBox(image: 'images/lock.png', title: "Криптинг",),
+          menuBox(image: 'images/bills.png', title: "Telegram Bot",),
+          menuBox(image: 'images/settings.png', title: "Найстройки",),
+          menuBox(image: 'images/numbers.png', title: "Контакты",),
 
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
-        currentIndex: 2,
+        currentIndex: 4,
         onTap: (int index) {
           setState(() {
             print(index);
@@ -120,12 +104,12 @@ class _Search extends State<Search> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-              color: Colors.black,
+              color: Colors.grey,
             ),
             title: Text('Поиск',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.black,
+                  color: Colors.grey,
                 )),
           ),
           BottomNavigationBarItem(
@@ -142,12 +126,12 @@ class _Search extends State<Search> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.more_horiz,
-              color: Colors.grey,
+              color: Colors.black,
             ),
             title: Text('Больше',
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.grey,
+                  color: Colors.black,
                 )),
           ),
         ],

@@ -268,16 +268,16 @@ class _Home extends State<Home> {
                       ],
                     )],),
                   ))),
-          Positioned(
-            right: 20,
-            bottom: 20,
-            child: FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: () => setState(() {
-                Navigator.pushReplacementNamed(context, '/');
-              }),
-            ),
-          ),
+//          Positioned(
+//            right: 20,
+//            bottom: 20,
+//            child: FloatingActionButton(
+//              backgroundColor: Colors.red,
+//              onPressed: () => setState(() {
+//                Navigator.pushReplacementNamed(context, '/');
+//              }),
+//            ),
+//          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
