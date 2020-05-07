@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
-
+import 'package:http/http.dart' as http;
+import 'package:paradox/config';
 import 'package:flutter/material.dart';
 
 class Payments extends StatefulWidget {
@@ -37,9 +39,37 @@ class _Payments extends State<Payments> {
 //      _selectedIndex = index;
 //    });
 //  }
+  String balance = Config.balance;
+
+  void LoadFromBack() async {
+    print("LOADING");
+    // Navigator.pushReplacementNamed(context, '/home');
+    final http.Response response = await http.post(
+      Config.url+'login',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'name': Config.name,
+      }),
+    );
+    if (response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      print("LOADED");
+      this.balance = Config.balance;
+      Config.balance = json.decode(response.body)['balance'].toString();
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    LoadFromBack();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -47,7 +77,7 @@ class _Payments extends State<Payments> {
            Stack(
         children: [
           Container(height: 1, width: 1000,),
-          Positioned(left: 36, top: 60, child: Text("Ваш счет : 0 руб.", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),)),
+          Positioned(left: 36, top: 60, child: Text("Ваш счет : ${this.balance} руб.", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),)),
           Positioned(left: 45, top: 90, child: Text("Вывод средств >", style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w500),)),
           Positioned(left: 36, top: 140, child: Text("Платежи:", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),)),
 //          Center( child: Container(child: Row (children:[ Align( alignment: Alignment.center, child: Image.asset('images/empty.png', scale: 0.75,))])))
@@ -60,7 +90,6 @@ class _Payments extends State<Payments> {
         currentIndex: 1,
         onTap: (int index) {
           setState(() {
-            print(index);
             this._selectedIndex = index;
           });
           _navigateToScreens(index);

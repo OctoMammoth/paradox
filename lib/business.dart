@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:paradox/config';
 import 'package:flutter/material.dart';
 
 import 'widgets/menuBox.dart';
@@ -19,9 +19,9 @@ class _Business extends State<Business> {
     Icons.notifications_none
   ];
   Icon randomIcon() => Icon(
-    iconData[r.nextInt(iconData.length)],
-    size: 40,
-  );
+        iconData[r.nextInt(iconData.length)],
+        size: 40,
+      );
   final List<Color> colorData = <Color>[Color(0xFF6B94FF), Color(0xFFFFFFFF)];
   Color randomColor() => Color(colorData[r.nextInt(colorData.length)].value);
 
@@ -42,6 +42,8 @@ class _Business extends State<Business> {
 
   @override
   Widget build(BuildContext context) {
+    Function someFunction() {};
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -57,14 +59,34 @@ class _Business extends State<Business> {
           Container(
             height: 32,
           ),
-
-          menuBox(image: 'images/orders.png', title: "Заказы", onTap: () => {Navigator.pushNamed(context, '/ordersBusiness')},),
-          menuBox(image: 'images/teamates.png', title: "Сотрудники", onTap: () => {Navigator.pushNamed(context, "/team")},),
-          menuBox(image: 'images/marketing.png', title: "Умная булгахтерия (LITE)",),
-          menuBox(image: 'images/bills.png', title: "Квитанции",),
-          menuBox(image: 'images/managment.png', title: "Управление услугами",),
-          menuBox(image: 'images/lock.png', title: "Безопасность",),
-
+          menuBox(
+            image: 'images/orders.png',
+            title: "Заказы",
+            onTap: () => {Navigator.pushNamed(context, '/ordersBusiness')},
+          ),
+          menuBox(
+            image: 'images/teamates.png',
+            title: "Сотрудники",
+            onTap: () => {Navigator.pushNamed(context, "/team")},
+          ),
+          menuBox(
+              image: 'images/marketing.png',
+              title: "Умная булгахтерия (LITE)",
+              onTap: () => {
+                someFunction()
+              }),
+          menuBox(
+            image: 'images/bills.png',
+            title: "Квитанции",
+          ),
+          menuBox(
+            image: 'images/managment.png',
+            title: "Управление услугами",
+          ),
+          menuBox(
+            image: 'images/lock.png',
+            title: "Безопасность",
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

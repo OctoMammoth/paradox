@@ -8,9 +8,12 @@ import 'payments.dart';
 import 'search.dart';
 import 'business.dart';
 import 'more.dart';
+import 'dart:convert';
 import 'ordersBusiness.dart';
 import 'team.dart';
 import 'telegram.dart';
+import 'package:http/http.dart' as http;
+import 'package:paradox/config';
 
 void main() {
   runApp(MyApp());
@@ -55,6 +58,7 @@ bool _bigger = true;
 
 class _MyHomePageState extends State<MyHomePage> {
   Timer _timer;
+  final myController = TextEditingController();
 
   _MyHomePageState() {
     _timer = new Timer(const Duration(seconds: 3), () async {
@@ -62,6 +66,31 @@ class _MyHomePageState extends State<MyHomePage> {
         _bigger = false;
       });
     });
+  }
+
+  _LoadFromBack() async {
+    // Navigator.pushReplacementNamed(context, '/home');
+    final http.Response response = await http.post(
+      Config.url+'login',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'name': myController.text,
+      }),
+    );
+    if (response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      Config.name =  myController.text;
+      Config.id = json.decode(response.body)['id'];
+      Config.balance = json.decode(response.body)['balance'].toString();
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
   }
 
   @override
@@ -86,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: myController,
                       decoration: InputDecoration(
                           border: _bigger ? InputBorder.none : border,
                           hintText: 'Мобильный телефон или почта'),
@@ -104,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     FlatButton(
                         color: Color(0xFF3367EF),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          _LoadFromBack();
                         },
                         textColor: Colors.white,
                         padding: const EdgeInsets.all(0.0),
